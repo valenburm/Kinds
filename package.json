@@ -1,0 +1,26 @@
+{
+  "name": "@bvm/kinds",
+  "version": "1.0.0",
+  "description": "Sample using gulp/bower/angular 2/type script",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valenburm/Kinds.git"
+  },
+  "keywords": [
+    "Kinds",
+    "baby"
+  ],
+  "author": "bvm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valenburm/Kinds/issues"
+  },
+  "homepage": "https://github.com/valenburm/Kinds#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
