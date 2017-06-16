@@ -1,3 +1,14 @@
-.testing {
-  width: percentage(5/6);
+$font-basic:    Helvetica, sans-serif;
+$primary-color: #777;
+$bg-color: #eee;
+
+body {
+   font-family: $font-basic;
+
+ }
+
+body {
+  font: 100% $font-basic;
+  color: $primary-color;
+  background-color: $bg-color;
 }

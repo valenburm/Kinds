@@ -5,4 +5,4 @@ var tasks = requireDir('./gulp-tasks');
 var config = require('./gulp.config')();
 
 /* Default task */
-gulp.task('default', ['compile']);
+gulp.task('default', ['build']);

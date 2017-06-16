@@ -5,7 +5,7 @@ module.exports = function () {
     var scssFiles = [
         app + '**/*.scss'
     ];
-    var dist = '.build/';
+    var dist = 'dist/';
 
     return {
         root: root,
