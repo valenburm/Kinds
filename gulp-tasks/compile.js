@@ -7,16 +7,8 @@ var concat = require('gulp-concat');
 var inject = require('gulp-inject');
 //var mergeStream = require('merge-stream');
 
-// Style
-var sass = require('gulp-sass');
-var minify = require('gulp-minify-css');
-
-// HTML
-//var htmlMin = require('gulp-htmlmin');
-
-var runSequence = require('run-sequence');
-
 gulp.task('compile', function(callback) {
+    var runSequence = require('run-sequence');
     runSequence('compile:resources', 'compile:index', callback);
 });
 
@@ -32,25 +24,31 @@ gulp.task('compile:resources', [], function () {
 });
 
 function compileSass(sassFiles) {
-    console.log("Generate CSS files " + (new Date()).toString());
+    console.log("[BVM] Generate CSS files " + (new Date()).toString());
+
+    var sass = require('gulp-sass');
+    var minify = require('gulp-minify-css');
 
     return gulp.src(sassFiles)
         .pipe(sass()) // Converts Sass to CSS with gulp-sass
-        .pipe(concat('app.main1.css'))
+        .pipe(concat('app.main.css'))
         .pipe(minify())
         .pipe(gulp.dest(config.dist+'css'));
 }
 
+// HTML
+//var htmlMin = require('gulp-htmlmin');
+
 gulp.task('compile:index', [], function () {
 
     var packageVersionSuffix = '?ver=' + JSON.parse(fs.readFileSync(config.root+'package.json')).version;
-    console.log('Current version: ' + packageVersionSuffix);
+    console.log('[BVM] Current version: ' + packageVersionSuffix);
 
     return compileIndex(packageVersionSuffix, config.dist+'css');
 });
 
 function compileIndex(packageVersionSuffix, cssDir) {
-    console.log("Build index page " + (new Date()).toString());
+    console.log("[BVM] Build index page " + (new Date()).toString());
 
     var transformCss = function (filePath) {
         return '<link rel="stylesheet" href="' + filePath + packageVersionSuffix + '">';
@@ -60,7 +58,7 @@ function compileIndex(packageVersionSuffix, cssDir) {
         // Injecting custom css files
         .pipe(inject(gulp.src([cssDir + '/**/*.css'], {read: false}), {
             starttag: '<!-- customer:app_css -->',
-            ignorePath: '.build',
+            ignorePath: '../'+config.dist,
             relative: true,
             transform: transformCss
         }))
