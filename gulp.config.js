@@ -5,12 +5,16 @@ module.exports = function () {
     var scssFiles = [
         app + '**/*.scss'
     ];
+    var tsFiles = [
+        app + 'components/**/*.ts'
+    ];
     var dist = 'dist/';
 
     return {
         root: root,
         app: app,
         dist: dist,
-        scssFiles: scssFiles
+        scssFiles: scssFiles,
+        tsFiles: tsFiles
     };
 };
