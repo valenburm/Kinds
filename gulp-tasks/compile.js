@@ -18,6 +18,9 @@ gulp.task('compile', function(callback) {
 
 //gulp.task('compile:resources', ['concat:js'], function () {
 gulp.task('compile:resources', [], function () {
+    // Copy CSS UI styles
+    var cssUIStylesStream = copyCSSUIStyles();
+
     // Generate CSS files
     var sassStream = compileSass(config.scssFiles);
 
@@ -30,7 +33,7 @@ gulp.task('compile:resources', [], function () {
     //var htmls = gulp.src(config.app + 'components/**/*.html')
     //    .pipe(gulp.dest(config.dist+'templates'));
 
-    return mergeStream(sassStream);
+    return mergeStream(sassStream, cssUIStylesStream);
 });
 
 function compileSass(sassFiles) {
@@ -45,6 +48,13 @@ function compileSass(sassFiles) {
         //.pipe(concat('app.main.css'))
         .pipe(minify())
         .pipe(gulp.dest(config.dist+'css'));
+}
+
+function copyCSSUIStyles() {
+    console.log("[BVM] Copy CSS UI styles " + (new Date()).toString());
+
+    return gulp.src(config.app + "assets/**/*")
+        .pipe(gulp.dest(config.dist+"css"));
 }
 
 /*function compileJS(tsFiles) {

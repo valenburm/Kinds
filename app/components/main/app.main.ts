@@ -15,6 +15,16 @@ export class MainComponent implements OnInit {
     }
 
     ngOnInit(){
+    }
 
+    addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean {
+        console.log(`Adding article title: ${title.value} and link: ${link.value}`);
+        this.days.push(title.value);
+        return false;
+    }
+
+    sortedDays(): string[]
+    {
+        return this.days.sort((a: string, b: string) => b === a ? 0 : 1);
     }
 }
